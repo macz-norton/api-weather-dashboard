@@ -40,6 +40,6 @@ $.ajax({
 }).then(function(response) {
 
     var dateEl = $("<h3>").text(response.list.dt);
-    var weatherEl = $("<p>").text(response.list.weather.description);
+    var weatherEl = $("<i>").i(response.list.weather.icon);
     var temperatureEl = $("<p>").text(response.list.main.temp.metric);
     var humidityEl = $("<p>").text(response.list.main.humidity);

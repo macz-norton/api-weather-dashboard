@@ -17,22 +17,25 @@
         <h1 class="display-6 text-light bg-dark text-center">Weather Dashboard</h1>
     </header>
 
-    <aside>
+    <aside class="col-md-3">
 
-        <form class="form-inline">
-            <label class="font-weight-bold" for="inlineFormInputCity">Search for a City:</label>
-            <input type="text" class="form-control mb-2 ml-2" id="inlineFormInputCity" placeholder="Seattle">
-        
-            <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-        </form>
-
-        <div>
+        <div class="input-group mb-3">
+            <label for="city-button">Search for a City:</label>
+            <input type="text" class="form-control">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="city-button"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
 
     </aside>
 
-    <main>
+    <main class="col-md-9">
 
-        <div>
+        <div class="card">
+            <div class="card-body"></div>
+        </div>
+
+        <div class="container">
 
         </div>
 

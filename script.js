@@ -21,5 +21,8 @@ $.ajax({
     url: queryURL,
     method: "GET"
 }).then(function(response) {
-    console.log(response);
+
+
+    // append new elements that show the information
+
 })

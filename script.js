@@ -14,15 +14,32 @@
 
 var city = "";
 var APIkey = "";
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIkey
-
+var queryCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
 
 $.ajax({
-    url: queryURL,
+    url: queryCurrent,
     method: "GET"
 }).then(function(response) {
 
-
-    // append new elements that show the information
+    var cityNameEl = $("<h2>").text(response.name);
+    var weatherIconEl = $("<i>").icon(response.weather.icon);
+    var temperatureEl = $("<p>").text(response.list.main.temp.metric);
+    var humidityEl = $("<p>").text(response.list.main.humidity);
+    var windSpeedEl = $("<p>").text(response.list.wind.speed);
+    // var uvIndexEl = $("<p>").text(
 
 })
+
+var city = "";
+var APIkey = "";
+var query5day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIkey;
+
+$.ajax({
+    url: query5day,
+    method: "GET"
+}).then(function(response) {
+
+    var dateEl = $("<h3>").text(response.list.dt);
+    var weatherEl = $("<p>").text(response.list.weather.description);
+    var temperatureEl = $("<p>").text(response.list.main.temp.metric);
+    var humidityEl = $("<p>").text(response.list.main.humidity);

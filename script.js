@@ -17,22 +17,38 @@
 
 // This function handles events where one button is clicked
 $("#city-button").on("click", function(event) {
-// event.preventDefault() prevents the form from trying to submit itself.
-// We're using a form so that the user can hit enter instead of clicking the button if they want
-event.preventDefault();
+    // event.preventDefault() prevents the form from trying to submit itself.
+    // We're using a form so that the user can hit enter instead of clicking the button if they want
+    event.preventDefault();
 
-// This line will grab the text from the input box
-var userCity = $("#user-input").val().trim();
-console.log(userCity);
+    // This line will grab the text from the input box
+    var userCity = $("#user-input").val().trim();
+    console.log(userCity);
 
-JSON.stringify(userCity);
-localStorage.setItem("city", userCity);
+    JSON.stringify(userCity);
+    localStorage.setItem("city", userCity);
 
-var userCitySaved = localStorage.getItem("city");
-console.log(userCitySaved);
-$(".list-group-item").text(userCitySaved);
+    var userCitySaved = localStorage.getItem("city");
+    console.log(userCitySaved);
+    // $(".list-group-item").text(userCitySaved);
+
+    // for (var i = 0; i < userCitySaved.length; i++) {
+
+    // Then dynamicaly generating buttons for each movie in the array.
+    // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+    var button = $("<button>");
+    // Adding a class
+    button.addClass("city-list");
+    // Adding a data-attribute with a value of the movie at index i
+    button.attr("data-city", userCitySaved);
+    // Providing the button's text with a value of the movie at index i
+    button.text(userCitySaved);
+    // Adding the button to the HTML
+    $("#search-list").append(button);
+    // }
 
 });
+
 
 // var city = "";
 // var APIkey = "";

@@ -16,22 +16,24 @@
 $("#citySearch").on("click", function(event) {
     event.preventDefault();
 
+    // Collect `userInput`
     var userCity = $(".userInput").val().trim();
-    console.log(userCity);
 
+    // Store `userCity` in local storage
     JSON.stringify(userCity);
     localStorage.setItem("city", userCity);
 
+    // Get `userCitySaved` out of local storage
     var userCitySaved = localStorage.getItem("city");
-    console.log(userCitySaved);
 
+    // Create and prepend a `cityButton` to save city searches
     var cityButton = $("<button>");
     cityButton.attr("type", "button");
     cityButton.addClass("btn btn-light btn-lg btn-block");
     cityButton.attr("data-city", userCitySaved);
     cityButton.text(userCitySaved);
     $(".searchList").prepend(cityButton);
-    
+
 });
 
 // function getWeather(){

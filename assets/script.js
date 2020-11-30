@@ -36,28 +36,49 @@ $("#citySearch").on("click", function(event) {
 
 });
 
-// function getWeather(){
+function getCurrentWeather() {
 
-//     var city = "";
-//     var APIkey = "";
-//     var queryCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
+    var city = "";
+    var APIkey = "d5fdfbd079865261527ef46dccc3c543";
+    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
     
-//     $.ajax({
-//         url: queryCurrent,
-//         method: "GET"
-//     }).then(function(response) {
-    
-//         var cityNameEl = $("<h2>").text(response.name);
-//         var weatherIconEl = $("<i>").icon(response.weather.icon);
-//         var temperatureEl = $("<p>").text(response.list.main.temp.metric);
-//         var humidityEl = $("<p>").text(response.list.main.humidity);
-//         var windSpeedEl = $("<p>").text(response.list.wind.speed);
-//         // var uvIndexEl = $("<p>").text(
-    
-//     })
+    $.ajax({
+        url: queryCurrentWeather,
+        method: "GET"
+    }).then(function(response) {
 
-// }
+        var currentCity = $("<h2>").addClass("card-title").text(response.name + response.dt);
+        var currentWeatherIcon = $("<i>").addClass("card-text").text(response.weather.icon);
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "F");
+        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + " %");
+        var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
+    })
 
+}
+
+function getOneCall() {
+
+    var cityLat =
+    var cityLong = 
+
+    $.ajax({
+        url: queryCurrentWeather,
+        method: "GET"
+    }).then(function(response) {
+
+        var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
+
+
+        var cityNameEl = $("<h2>").text(response.name);
+        var weatherIconEl = $("<i>").icon(response.weather.icon);
+        var temperatureEl = $("<p>").text(response.list.main.temp.metric);
+        var humidityEl = $("<p>").text(response.list.main.humidity);
+        var windSpeedEl = $("<p>").text(response.list.wind.speed);
+        // var uvIndexEl = $("<p>").text(
+    
+
+
+}
 
 
 // var city = "";

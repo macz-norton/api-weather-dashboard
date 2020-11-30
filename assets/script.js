@@ -15,7 +15,7 @@
 
 var lat;
 var lon;
-var city;
+var citySearched;
 
 // When user clicks `citySearch` button
 $("#citySearch").on("click", function(event) {
@@ -29,51 +29,53 @@ $("#citySearch").on("click", function(event) {
     localStorage.setItem("city", userCity);
 
     // Get `userCitySaved` out of local storage
-    var userCitySaved = localStorage.getItem("city");
+    citySearched = localStorage.getItem("city");
 
     // Create and prepend a `cityButton` to save city searches
     var cityButton = $("<button>");
     cityButton.attr("type", "button");
     cityButton.addClass("btn btn-light btn-lg btn-block");
-    cityButton.attr("data-city", userCitySaved);
-    cityButton.text(userCitySaved);
+    cityButton.attr("data-city", citySearched);
+    cityButton.text(citySearched);
     $(".searchList").prepend(cityButton);
+
+    getCurrentWeather();
 
 });
 
-function getCurrentWeather(city) {
+function getCurrentWeather(citySearched) {
 
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
-    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
+    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey;
     
     $.ajax({
         url: queryCurrentWeather,
         method: "GET"
     }).then(function(response) {
-
-        var currentCity = $("<h2>").addClass("card-title").text(response.name + response.dt);
-        var currentWeatherIcon = $("<i>").addClass("card-text").text(response.weather.icon);
-        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
-        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
-        var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
-        var lon = response.coord.lon;
-        var lat = response.coord.lat;
+        var currentCity = $(".currentWeather")("<h2>").addClass("card-title").text(response.name + (moment.unix(response.dt).format("L")));
+        var currentWeatherIcon = $(".currentWeather")("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
+        var currentTemp = $(".currentWeather")("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
+        var currentHumidity = $(".currentWeather")("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
+        var currentWindSpeed = $(".currentWeather")("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
+        lon = response.coord.lon;
+        lat = response.coord.lat;
     })
 
 }
 
-function getOneCall(lat, lon) {
-    var APIkey = "8355a314da7feb918a55961d626714a9";
-    var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
+// function getOneCall(lat, lon) {
+//     var APIkey = "8355a314da7feb918a55961d626714a9";
+//     var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
 
-    $.ajax({
-        url: queryOneCall,
-        method: "GET"
-    }).then(function(response) {
+//     $.ajax({
+//         url: queryOneCall,
+//         method: "GET"
+//     }).then(function(response) {
 
-        var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
-        var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.weather.icon + ".png")
-        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily.temp.day.metric);
-        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
-    });
-}
+//         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
+//         var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
+//         var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily.temp.day.metric);
+//         var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
+//     });
+// }
+

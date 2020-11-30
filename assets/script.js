@@ -49,59 +49,68 @@ $("#city-button").on("click", function(event) {
 
 });
 
+function getWeather(){
 
-// var city = "";
-// var APIkey = "";
-// var queryCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
+    var city = "";
+    var APIkey = "";
+    var queryCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
+    
+    $.ajax({
+        url: queryCurrent,
+        method: "GET"
+    }).then(function(response) {
+    
+        var cityNameEl = $("<h2>").text(response.name);
+        var weatherIconEl = $("<i>").icon(response.weather.icon);
+        var temperatureEl = $("<p>").text(response.list.main.temp.metric);
+        var humidityEl = $("<p>").text(response.list.main.humidity);
+        var windSpeedEl = $("<p>").text(response.list.wind.speed);
+        // var uvIndexEl = $("<p>").text(
+    
+    })
 
-// $.ajax({
-//     url: queryCurrent,
-//     method: "GET"
-// }).then(function(response) {
+}
 
-//     var cityNameEl = $("<h2>").text(response.name);
-//     var weatherIconEl = $("<i>").icon(response.weather.icon);
-//     var temperatureEl = $("<p>").text(response.list.main.temp.metric);
-//     var humidityEl = $("<p>").text(response.list.main.humidity);
-//     var windSpeedEl = $("<p>").text(response.list.wind.speed);
-//     // var uvIndexEl = $("<p>").text(
 
-// })
 
-// var city = "";
-// var APIkey = "";
-// var query5day = "api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=5&appid=" + APIkey;
+var city = "";
+var APIkey = "";
+var query5day = "api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=5&appid=" + APIkey;
 
-// $.ajax({
-//     url: query5day,
-//     method: "GET"
-// }).then(function(response) {
+$.ajax({
+    url: query5day,
+    method: "GET"
+}).then(function(response) {
 
-//     var dateEl = $("<h3>").text(response.list.dt);
-//     var weatherEl = $("<i>").i(response.list.weather.icon);
-//     var temperatureEl = $("<p>").text(response.list.main.temp.metric);
-//     var humidityEl = $("<p>").text(response.list.main.humidity);
-// });
+    var dateEl = $("<h3>").text(response.list.dt);
+    var weatherEl = $("<i>").i(response.list.weather.icon);
+    var temperatureEl = $("<p>").text(response.list.main.temp.metric);
+    var humidityEl = $("<p>").text(response.list.main.humidity);
+});
 
-// var latitude = "";
-// var longitude = "";
-// var APIkey = "";
-// var query5day = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey;
+var latitude = "";
+var longitude = "";
+var APIkey = "";
+var query5day = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey;
 
-// $.ajax({
-//     url: query5day,
-//     method: "GET"
-// }).then(function(response) {
+$.ajax({
+    url: query5day,
+    method: "GET"
+}).then(function(response) {
 
-//     var dateEl = $("<h3>").text(response.list.dt);
+    var dateEl = $("<h3>").text(response.list.dt);
 
-// three variables that will get the data from each of the three APIs. 
-// var people, places, reports 
-// wait for all queries to be done before doing something with the data.
-// $.when( 
-//     $.get(url_1, data => people = data),
-//     $.get(url_2, data => places = data),
-//     $.get(url_3, data => reports = data)
-// ).then(function() {
-//     ...
-//
+three variables that will get the data from each of the three APIs. 
+var people, places, reports 
+wait for all queries to be done before doing something with the data.
+$.when( 
+    $.get(url_1, data => people = data),
+    $.get(url_2, data => places = data),
+    $.get(url_3, data => reports = data)
+).then(function() {
+    ...
+
+// Use bootstrap classes in JavaScript 
+
+var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
+var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");

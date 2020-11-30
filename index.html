@@ -10,6 +10,10 @@
   
   <!-- Link to FontAwesome -->
   <script src="https://kit.fontawesome.com/b5d5c9bc1f.js" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
 </head>
 <body>
 
@@ -23,17 +27,15 @@
       <h4>Search weather for a city:</h4>
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control userInput">
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button" id="city-button">
+          <button class="btn btn-primary" type="button" id="citySearch">
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-body"></div>
-      </div>
+      <div class="btn-group-vertical searchList"></div>
 
     </aside>
 
@@ -69,7 +71,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <!-- Link to JS file -->
-    <script src="script.js"></script>
+    <script src="./assets/script.js"></script>
 
 </body>
 </html>

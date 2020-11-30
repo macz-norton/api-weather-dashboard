@@ -17,44 +17,52 @@
     <h1 class="display-6 text-light bg-dark text-center">Weather Dashboard</h1>
   </header>
 
-  <aside class="col-4">
+  <div class="d-flex">
+    <aside class="col-3">
 
-    <h4>Search weather for a city:</h4>
-    
-    <div class="input-group mb-3">
-      <input type="text" class="form-control">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button" id="city-button">
-          <i class="fas fa-search"></i>
-        </button>
+      <h4>Search weather for a city:</h4>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" id="city-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body"></div>
-    </div>
-
-  </aside>
-
-  <main class="col-9">
 
       <div class="card">
-          <div class="card-body"></div>
+        <div class="card-body"></div>
       </div>
 
-      <div class="container">
-          <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
+    </aside>
+
+    <main class="col-9">
+
+      <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="card-title cityWeather"></h2>
+            <p class="card-text cityTemp"></p>
+            <p class="card-text cityHumidity"></p>
+            <p class="card-text cityWindSpeed"></p>
+            <p class="card-text cityUVIndex"></p>
+          </div>
       </div>
 
-  </main>
+      <section>
+        <h3 class="fiveDayForecast"></h3>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title forecastDate"></h5>
+            <i></i>
+            <p class="card-text forecastTemp"></p>
+            <p class="card-text forecastHumidity"></p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
 
     <!-- jQuery and JS bundle w/ Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

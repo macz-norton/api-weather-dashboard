@@ -12,6 +12,11 @@
 // WHEN I open the weather dashboard
 // THEN I am presented with the last searched city forecast
 
+
+var lat;
+var lon;
+var city;
+
 // When user clicks `citySearch` button
 $("#citySearch").on("click", function(event) {
     event.preventDefault();
@@ -36,9 +41,8 @@ $("#citySearch").on("click", function(event) {
 
 });
 
-function getCurrentWeather() {
+function getCurrentWeather(city) {
 
-    var city = "";
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
     var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
     
@@ -49,18 +53,17 @@ function getCurrentWeather() {
 
         var currentCity = $("<h2>").addClass("card-title").text(response.name + response.dt);
         var currentWeatherIcon = $("<i>").addClass("card-text").text(response.weather.icon);
-        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp.metric + "F");
-        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + " %");
-        var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
+        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
+        var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
+        var lon = response.coord.lon;
+        var lat = response.coord.lat;
     })
 
 }
 
-function getOneCall() {
-
-    var cityLat =
-    var cityLong = 
-    var APIkey = "";
+function getOneCall(lat, lon) {
+    var APIkey = "8355a314da7feb918a55961d626714a9";
     var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
 
     $.ajax({

@@ -49,7 +49,7 @@ function getCurrentWeather() {
 
         var currentCity = $("<h2>").addClass("card-title").text(response.name + response.dt);
         var currentWeatherIcon = $("<i>").addClass("card-text").text(response.weather.icon);
-        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "F");
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp.metric + "F");
         var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + " %");
         var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
     })
@@ -60,65 +60,17 @@ function getOneCall() {
 
     var cityLat =
     var cityLong = 
+    var APIkey = "";
+    var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
 
     $.ajax({
-        url: queryCurrentWeather,
+        url: queryOneCall,
         method: "GET"
     }).then(function(response) {
 
-        var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
-
-
-        var cityNameEl = $("<h2>").text(response.name);
-        var weatherIconEl = $("<i>").icon(response.weather.icon);
-        var temperatureEl = $("<p>").text(response.list.main.temp.metric);
-        var humidityEl = $("<p>").text(response.list.main.humidity);
-        var windSpeedEl = $("<p>").text(response.list.wind.speed);
-        // var uvIndexEl = $("<p>").text(
-    
-
-
+        var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
+        var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.weather.icon + ".png")
+        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily.temp.day.metric);
+        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
+    });
 }
-
-
-// var city = "";
-// var APIkey = "";
-// var query5day = "api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=5&appid=" + APIkey;
-
-// $.ajax({
-//     url: query5day,
-//     method: "GET"
-// }).then(function(response) {
-
-//     var dateEl = $("<h3>").text(response.list.dt);
-//     var weatherEl = $("<i>").i(response.list.weather.icon);
-//     var temperatureEl = $("<p>").text(response.list.main.temp.metric);
-//     var humidityEl = $("<p>").text(response.list.main.humidity);
-// });
-
-// var latitude = "";
-// var longitude = "";
-// var APIkey = "";
-// var query5day = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIkey;
-
-// $.ajax({
-//     url: query5day,
-//     method: "GET"
-// }).then(function(response) {
-
-//     var dateEl = $("<h3>").text(response.list.dt);
-
-// three variables that will get the data from each of the three APIs. 
-// var people, places, reports 
-// wait for all queries to be done before doing something with the data.
-// $.when( 
-//     $.get(url_1, data => people = data),
-//     $.get(url_2, data => places = data),
-//     $.get(url_3, data => reports = data)
-// ).then(function() {
-//     ...
-
-// // Use bootstrap classes in JavaScript 
-
-// var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
-// var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");

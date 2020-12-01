@@ -18,7 +18,7 @@ var lon;
 var citySearched;
 
 // When user clicks `citySearch` button
-$("#citySearch").on("click", function(event) {
+$("#citySearch").click(function(event) {
     event.preventDefault();
 
     // Collect `userInput`
@@ -27,6 +27,12 @@ $("#citySearch").on("click", function(event) {
     // Store `userCity` in local storage
     JSON.stringify(userCity);
     localStorage.setItem("city", userCity);
+
+    getCurrentWeather();
+
+});
+
+function getCurrentWeather(citySearched) {
 
     // Get `userCitySaved` out of local storage
     citySearched = localStorage.getItem("city");
@@ -39,11 +45,7 @@ $("#citySearch").on("click", function(event) {
     cityButton.text(citySearched);
     $(".searchList").prepend(cityButton);
 
-    getCurrentWeather();
-
-});
-
-function getCurrentWeather(citySearched) {
+    console.log(citySearched);
 
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
     var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey;

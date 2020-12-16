@@ -12,12 +12,12 @@
 // WHEN I open the weather dashboard
 // THEN I am presented with the last searched city forecast
 
-
 var lat;
 var lon;
 var citySearched;
 
 // When user clicks `citySearch` button
+
 $("#citySearch").click(function(event) {
     event.preventDefault();
 
@@ -32,19 +32,18 @@ $("#citySearch").click(function(event) {
 
 });
 
+
 function getCurrentWeather(citySearched) {
 
     // Get `userCitySaved` out of local storage
     citySearched = localStorage.getItem("city");
 
-    // Create and prepend a `cityButton` to save city searches
+    // Create and prepend a `cityListItem` to save city searches
     var cityListItem = $("<li>");
     cityListItem.addClass("list-group-item");
     cityListItem.attr("data-city", citySearched);
     cityListItem.text(citySearched);
     $(".searchList").prepend(cityListItem);
-
-    console.log(citySearched);
 
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
     var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey;
@@ -56,13 +55,16 @@ function getCurrentWeather(citySearched) {
         method: "GET"
     }).then(function(response) {
         console.log(response.name);
-        $(".currentWeather")("<h2>").addClass("card-title").text(response.name + (moment.unix(response.dt).format("L")));
-        // $(".currentWeather")("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
+        // $(".currentWeather")("<h2>").addClass("card-title").text(response.name + (moment.unix(response.dt).format("L")));
+        $(".currentWeather")("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
         // $(".currentWeather")("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
         // $(".currentWeather")("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
         // $(".currentWeather")("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
         lon = response.coord.lon;
         lat = response.coord.lat;
+
+        // getOneCall(lat, lon);
+
     })
 }
 

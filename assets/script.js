@@ -55,9 +55,9 @@ function getCurrentWeather(citySearched) {
         method: "GET"
     }).then(function(response) {
         console.log(response.name);
-        var currentSearch = $("<h2>").addClass("card-title").text(response.name + " " + (moment.unix(response.dt).format("L")));
+        var currentSearch = $("<h2>").addClass("card-title").text(response.name + " " + (moment.unix(response.dt).format("(L)")));
         var currentIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png");
-        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + "F");
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + " °F");
         var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + "%");
         var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
        
@@ -83,12 +83,13 @@ function getOneCall(lat, lon) {
     }).then(function(response) {
 
         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
-        // var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
-        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + "F");
-        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity);
+        var fiveDayDate = $("<h4>").addClass("card-title fw-bold").text(moment.unix(response.daily[0].dt).format("L"));
+        var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png")
+        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + " °F");
+        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity) + "%";
 
         $(".currentWeather").append(currentUVIndex);
-        $(".fiveDayForecast").append(fiveDayTemp, fiveDayHumidity);
+        $(".fiveDayForecast").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
 
     });
 }

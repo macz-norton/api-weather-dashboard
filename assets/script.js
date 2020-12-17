@@ -57,8 +57,8 @@ function getCurrentWeather(citySearched) {
         console.log(response.name);
         var currentSearch = $("<h2>").addClass("card-title").text(response.name + " " + (moment.unix(response.dt).format("L")));
         var currentIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png");
-        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
-        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + "F");
+        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + "%");
         var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
        
         $(".currentWeather").append(currentSearch, currentIcon, currentTemp, currentHumidity, currentWindSpeed);
@@ -66,24 +66,29 @@ function getCurrentWeather(citySearched) {
         lon = response.coord.lon;
         lat = response.coord.lat;
 
-        // getOneCall(lat, lon);
+        getOneCall(lat, lon);
 
     })
 }
 
-// function getOneCall(lat, lon) {
-//     var APIkey = "8355a314da7feb918a55961d626714a9";
-//     var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
+function getOneCall(lat, lon) {
+    var APIkey = "8355a314da7feb918a55961d626714a9";
+    var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
 
-//     $.ajax({
-//         url: queryOneCall,
-//         method: "GET"
-//     }).then(function(response) {
+    console.log(queryOneCall);
 
-//         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
-//         var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
-//         var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily.temp.day.metric);
-//         var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
-//     });
-// }
+    $.ajax({
+        url: queryOneCall,
+        method: "GET"
+    }).then(function(response) {
 
+        var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
+        // var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
+        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + "F");
+        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
+
+        $(".currentWeather").append(currentUVIndex);
+        $(".fiveDayForecast").append(fiveDayTemp, fiveDayHumidity);
+
+    });
+}

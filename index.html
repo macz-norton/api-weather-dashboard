@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Weather Dashboard</title>
 
   <!-- Normalize CSS -->
@@ -15,13 +19,14 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
+
 <body>
 
   <header>
     <h1 class="display-6 text-light bg-dark text-center m-0">Weather Dashboard</h1>
   </header>
 
-  <div class="d-flex">
+  <div class="mt-0 d-flex">
     <aside class="col-3 bg-light">
 
       <h4 class="m-2">Search for a city:</h4>
@@ -39,19 +44,36 @@
 
     </aside>
 
-    <main class="col-9 m-4">
+    <main class="col-8 m-4">
 
-      <div class="card mb-3">
+      <div class="card m-2">
         <div class="card-body currentWeather"></div>
       </div>
 
-      <section class="forecast">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body dayOne"></div>
+      <section class="forecast d-flex">
+        <div class="card m-2" style="width: 10rem;">
+          <div class="card-body day1"></div>
+        </div>
+
+        <div class="card m-2" style="width: 10rem;">
+          <div class="card-body day2"></div>
+        </div>
+
+        <div class="card m-2" style="width: 10rem;">
+          <div class="card-body day3"></div>
+        </div>
+
+        <div class="card m-2" style="width: 10rem;">
+          <div class="card-body day4"></div>
+        </div>
+
+        <div class="card m-2" style="width: 10rem;">
+          <div class="card-body day5"></div>
         </div>
       </section>
 
     </main>
+
   </div>
 
   <!-- jQuery -->
@@ -68,4 +90,5 @@
   <script src="./assets/script.js"></script>
 
 </body>
+
 </html>

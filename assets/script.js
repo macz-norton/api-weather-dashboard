@@ -40,19 +40,26 @@ function getCurrentWeather(citySearched) {
         url: queryCurrentWeather,
         method: "GET"
     }).then(function(response) {
-        console.log(response.name);
+
+        // Create variables to store new HTML element with API response data
         var currentSearch = $("<h2>").addClass("card-title").text(response.name + " " + (moment.unix(response.dt).format("(L)")));
         var currentIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png");
         var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + " °F");
         var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + "%");
         var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
        
+        // Empty current weather HTML on the page
+        $(".currentWeather").empty();
+
+        // Append new variables to the HTML page
         $(".currentWeather").append(currentSearch, currentTemp, currentHumidity, currentWindSpeed);
         $(currentSearch).append(currentIcon);
        
-        lon = response.coord.lon;
+        // Store API values for lat and lon
         lat = response.coord.lat;
+        lon = response.coord.lon;
 
+        // Call `getOneCall` function, passing in lat and lon values
         getOneCall(lat, lon);
 
     })

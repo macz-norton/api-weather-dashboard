@@ -106,7 +106,7 @@ function getOneCall(lat, lon) {
             var fiveDayDate = $("<h6>").addClass("card-title fw-bold").text(moment.unix(response.daily[dayIndex].dt).format("L"));
             var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[dayIndex].weather[0].icon + ".png")
             var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[dayIndex].temp.day + " °F");
-            var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[dayIndex].humidity) + "%";
+            var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[dayIndex].humidity + "%");
 
             $(".day"+ dayIndex).append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
         } 

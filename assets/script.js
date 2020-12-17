@@ -65,40 +65,51 @@ function getCurrentWeather(citySearched) {
     })
 }
 
+// Function to query One Call API
 function getOneCall(lat, lon) {
+
+    // Variables for query URL
     var APIkey = "8355a314da7feb918a55961d626714a9";
     var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
-
-    console.log(queryOneCall);
 
     $.ajax({
         url: queryOneCall,
         method: "GET"
     }).then(function(response) {
 
-            var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
-            $(".currentWeather").append(currentUVIndex);
+        // Create variables to store new HTML element with API response data
+        var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: ");
+        var uvSpan = $("<span></span>").addClass("badge").text(response.current.uvi);
+        // Append new variables to the HTML page
+        $(".currentWeather").append(currentUVIndex);
+        $(currentUVIndex).append(uvSpan)
 
-            if (response.current.uvi < 3) {
-                currentUVIndex.addClass("bg-success");
-            } else if (3 <= response.current.uvi < 6) {
-               currentUVIndex.addClass("bg-warning");
-            } else if (6 <= response.current.uvi < 7) {
-               currentUVIndex.addClass("text-orange-600");
-            } else if (7 <= response.current.uvi < 11 ) {
-               currentUVIndex.addClass("bg-warning");
-            } else {
-               currentUVIndex.addClass("text-pink-700");
-            }
+        // If statement to add colors to HTML based on UV index scale
+        if (response.current.uvi < 3) {
+            uvSpan.addClass("bg-success");
+        } else if (3 <= response.current.uvi < 6) {
+            uvSpan.addClass("bg-warning");
+        } else if (6 <= response.current.uvi < 7) {
+            uvSpan.addClass("text-orange-600");
+        } else if (7 <= response.current.uvi < 11 ) {
+            uvSpan.addClass("bg-warning");
+        } else {
+            uvSpan.addClass("text-pink-700");
+        }
 
-            for (var dayIndex = 1; dayIndex < 6; dayIndex++) {
-                var fiveDayDate = $("<h4>").addClass("card-title fw-bold").text(moment.unix(response.daily[dayIndex].dt).format("L"));
-                var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[dayIndex].weather[0].icon + ".png")
-                var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[dayIndex].temp.day + " °F");
-                var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[dayIndex].humidity) + "%";
+        // For loop to create variables for five day forecast and append to the cards
+        for (var dayIndex = 1; dayIndex < 6; dayIndex++) {
 
-                $(".dayOne").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
-            } 
+            // Empty current weather HTML on the page
+            $(".day" + dayIndex).empty();
+
+            var fiveDayDate = $("<h6>").addClass("card-title fw-bold").text(moment.unix(response.daily[dayIndex].dt).format("L"));
+            var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[dayIndex].weather[0].icon + ".png")
+            var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[dayIndex].temp.day + " °F");
+            var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[dayIndex].humidity) + "%";
+
+            $(".day"+ dayIndex).append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
+        } 
 
     });
 }

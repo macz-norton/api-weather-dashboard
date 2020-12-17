@@ -82,14 +82,26 @@ function getOneCall(lat, lon) {
         method: "GET"
     }).then(function(response) {
 
-        var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
-        var fiveDayDate = $("<h4>").addClass("card-title fw-bold").text(moment.unix(response.daily[0].dt).format("L"));
-        var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png")
-        var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + " °F");
-        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity) + "%";
+            var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
+            var fiveDayDate = $("<h4>").addClass("card-title fw-bold").text(moment.unix(response.daily[0].dt).format("L"));
+            var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png")
+            var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + " °F");
+            var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity) + "%";
 
-        $(".currentWeather").append(currentUVIndex);
-        $(".dayOne").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
-
+            $(".currentWeather").append(currentUVIndex);
+            $(".dayOne").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
+            
+            if (response.current.uvi < 3) {
+                 currentUVIndex.addClass("bg-success");
+            } else if (3 <= response.current.uvi < 6) {
+                currentUVIndex.addClass("bg-warning");
+            } else if (6 <= response.current.uvi < 7) {
+                currentUVIndex.addClass("text-orange-600");
+            } else if (7 <= response.current.uvi < 11 ) {
+                currentUVIndex.addClass("bg-warning");
+            } else {
+                currentUVIndex.addClass("text-pink-700");
+            }
     });
 }
+

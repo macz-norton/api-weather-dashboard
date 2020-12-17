@@ -28,7 +28,7 @@ $("#citySearch").click(function(event) {
     JSON.stringify(userCity);
     localStorage.setItem("city", userCity);
 
-    getCurrentWeather();
+    getCurrentWeather(citySearched);
 
 });
 
@@ -55,11 +55,14 @@ function getCurrentWeather(citySearched) {
         method: "GET"
     }).then(function(response) {
         console.log(response.name);
-        // $(".currentWeather")("<h2>").addClass("card-title").text(response.name + (moment.unix(response.dt).format("L")));
-        $(".currentWeather")("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
-        // $(".currentWeather")("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
-        // $(".currentWeather")("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
-        // $(".currentWeather")("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
+        var currentSearch = $("<h2>").addClass("card-title").text(response.name + " " + (moment.unix(response.dt).format("L")));
+        var currentIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png");
+        var currentTemp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp.metric + "F");
+        var currentHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
+        var currentWindSpeed = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
+       
+        $(".currentWeather").append(currentSearch, currentIcon, currentTemp, currentHumidity, currentWindSpeed);
+       
         lon = response.coord.lon;
         lat = response.coord.lat;
 

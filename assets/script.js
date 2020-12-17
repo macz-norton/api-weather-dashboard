@@ -89,7 +89,7 @@ function getOneCall(lat, lon) {
         var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity) + "%";
 
         $(".currentWeather").append(currentUVIndex);
-        $(".fiveDayForecast").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
+        $(".dayOne").append(fiveDayDate, fiveDayWeather, fiveDayTemp, fiveDayHumidity);
 
     });
 }

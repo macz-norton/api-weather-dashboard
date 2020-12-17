@@ -85,7 +85,7 @@ function getOneCall(lat, lon) {
         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: " + response.current.uvi);
         // var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather.icon + ".png")
         var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[0].temp.day + "F");
-        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily.humidity);
+        var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[0].humidity);
 
         $(".currentWeather").append(currentUVIndex);
         $(".fiveDayForecast").append(fiveDayTemp, fiveDayHumidity);

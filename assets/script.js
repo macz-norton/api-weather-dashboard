@@ -34,7 +34,7 @@ function getCurrentWeather(citySearched) {
 
     // Variables for query URL
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
-    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey;
+    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey + "&units=imperial";
 
     $.ajax({
         url: queryCurrentWeather,
@@ -70,7 +70,7 @@ function getOneCall(lat, lon) {
 
     // Variables for query URL
     var APIkey = "8355a314da7feb918a55961d626714a9";
-    var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey;
+    var queryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + APIkey + "&units=imperial";
 
     $.ajax({
         url: queryOneCall,

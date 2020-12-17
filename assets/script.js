@@ -1,40 +1,50 @@
 // Define global variables
 var lat;
 var lon;
-var citySearched;
+var userCity;
+var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
 // When user clicks `citySearch` button
 $("#citySearch").click(function(event) {
     event.preventDefault();
 
     // Collect `userInput`
-    var userCity = $(".userInput").val().trim();
+    userCity = $(".userInput").val();
 
     // Store `userCity` in local storage
-    JSON.stringify(userCity);
-    localStorage.setItem("city", userCity);
+    localStorage.setItem("city", JSON.stringify(userCity));
+
+    // Create and prepend a `cityListItem` to save city searches
+    var cityListItem = $("<button>");
+    cityListItem.addClass("list-group-item");
+    cityListItem.attr("data-city", userCity);
+    cityListItem.text(userCity);
+    $(".searchList").prepend(cityListItem);
+
+    savedCitySearch.push(userCity);
+    localStorage.setItem("Search History", JSON.stringify(savedCitySearch));
 
     // Run `getCurrentWeather` to query API
-    getCurrentWeather(citySearched);
+    getCurrentWeather(userCity);
 
 });
 
 // Function to query Current Weather API
-function getCurrentWeather(citySearched) {
+function getCurrentWeather(userCity) {
 
     // Get `userCitySaved` out of local storage
-    citySearched = localStorage.getItem("city");
+    // citySearched = localStorage.getItem("city");
 
     // Create and prepend a `cityListItem` to save city searches
-    var cityListItem = $("<li>");
-    cityListItem.addClass("list-group-item");
-    cityListItem.attr("data-city", citySearched);
-    cityListItem.text(citySearched);
-    $(".searchList").prepend(cityListItem);
+    // var cityListItem = $("<li>");
+    // cityListItem.addClass("list-group-item");
+    // cityListItem.attr("data-city", citySearched);
+    // cityListItem.text(citySearched);
+    // $(".searchList").prepend(cityListItem);
 
     // Variables for query URL
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";
-    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + "&appid=" + APIkey + "&units=imperial";
+    var queryCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&appid=" + APIkey + "&units=imperial";
 
     $.ajax({
         url: queryCurrentWeather,

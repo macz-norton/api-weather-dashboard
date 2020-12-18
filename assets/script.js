@@ -2,6 +2,7 @@
 var lat;
 var lon;
 var userCity;
+var cityListItem;
 var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
 // When user clicks `citySearch` button
@@ -15,7 +16,7 @@ $("#citySearch").click(function(event) {
     localStorage.setItem("city", JSON.stringify(userCity));
 
     // Create and prepend a `cityListItem` to save city searches
-    var cityListItem = $("<button>");
+    cityListItem = $("<button>");
     cityListItem.addClass("list-group-item");
     cityListItem.attr("data-city", userCity);
     cityListItem.text(userCity);
@@ -29,18 +30,18 @@ $("#citySearch").click(function(event) {
 
 });
 
+$(".searchList").click(function(event) {
+    event.preventDefault();
+
+    userCity = $(this).data("city");
+
+    // Run `getCurrentWeather` to query API
+    getCurrentWeather(userCity);
+
+});
+
 // Function to query Current Weather API
 function getCurrentWeather(userCity) {
-
-    // Get `userCitySaved` out of local storage
-    // citySearched = localStorage.getItem("city");
-
-    // Create and prepend a `cityListItem` to save city searches
-    // var cityListItem = $("<li>");
-    // cityListItem.addClass("list-group-item");
-    // cityListItem.attr("data-city", citySearched);
-    // cityListItem.text(citySearched);
-    // $(".searchList").prepend(cityListItem);
 
     // Variables for query URL
     var APIkey = "d5fdfbd079865261527ef46dccc3c543";

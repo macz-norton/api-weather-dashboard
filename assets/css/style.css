@@ -1,9 +1,13 @@
+.headerBar {
+    background-color: #2A4A82;
+}
+
 .currentWeather {
-    background-color: blue;
+    background-color: #215BA1;
     color: whitesmoke;
 }
 
 .fiveDay {
-    background-color: blue;
+    background-color: #215BA1;
     color: whitesmoke;
 }

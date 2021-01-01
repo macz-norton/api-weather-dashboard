@@ -6,16 +6,12 @@ var cityListItem;
 var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
 // Add last searched city 
-
 function showStoredCity() {
 
-    if (savedCitySearch !== " ") {
-        for (var city = 0; city < savedCitySearch.length; city++) {
-            $(".searchList").append($("<li>").text(savedCitySearch[i]).addClass("list-group-item"));
-        }
-    }
     getCurrentWeather(JSON.parse(localStorage.getItem("city")));
 }
+
+showStoredCity();
 
 // When user clicks `citySearch` button
 $("#citySearch").on("click", function(event) {
@@ -143,4 +139,3 @@ function getOneCall(lat, lon) {
     });
 }
 
-showStoredCity();

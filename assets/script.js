@@ -6,7 +6,7 @@ var cityListItem;
 var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
 // When user clicks `citySearch` button
-$("#citySearch").click(function(event) {
+$("#citySearch").on("click", function(event) {
     event.preventDefault();
 
     // Collect `userInput`
@@ -30,13 +30,19 @@ $("#citySearch").click(function(event) {
 
 });
 
-$(".searchList").click(function(event) {
+$(".searchList").on("click", function(event) {
+
     event.preventDefault();
 
-    userCity = $(this).data("city");
+    var storedCity = $(event.target).attr("data-city");
+    getCurrentWeather(storedCity);
 
-    // Run `getCurrentWeather` to query API
-    getCurrentWeather(userCity);
+    // var btnCity = $(".list-group-item").attr("data-city");
+    // localStorage.setItem("data-city", JSON.stringify(btnCity));
+    // console.log(btnCity)
+    // var storedData = JSON.parse(window.localStorage.getItem("data-city"));
+    // // Run `getCurrentWeather` to query API
+    // getCurrentWeather(storedData);
 
 });
 

@@ -5,6 +5,16 @@ var userCity;
 var cityListItem;
 var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
+// Add last searched city 
+
+function showStoredCity() {
+
+    if (savedCitySearch !== " ") {
+        $("#citySearch"),append(savedCitySearch);
+    }
+    getCurrentWeather(JSON.parse(localStorage.getItem("city")));
+}
+
 // When user clicks `citySearch` button
 $("#citySearch").on("click", function(event) {
     event.preventDefault();
@@ -131,3 +141,4 @@ function getOneCall(lat, lon) {
     });
 }
 
+showStoredCity();

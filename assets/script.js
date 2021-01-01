@@ -10,7 +10,9 @@ var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 function showStoredCity() {
 
     if (savedCitySearch !== " ") {
-        $("#citySearch"),append(savedCitySearch);
+        for (var city = 0; city < savedCitySearch.length; city++) {
+            $(".searchList").append($("<li>").text(savedCitySearch[i]).addClass("list-group-item"));
+        }
     }
     getCurrentWeather(JSON.parse(localStorage.getItem("city")));
 }

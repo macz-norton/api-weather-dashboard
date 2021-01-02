@@ -28,7 +28,7 @@ No installation required.
 When you open the weather dashboard, type a city name and click the search button to see the current weather and five-day weather forecast. When you reload the page, the last stored city's weather data will populate on the page.
 * Link to the deployed application: https://macz-norton.github.io/api-weather-dashboard/
 * Gif that demonstrates the application's functionality:
-![A user searches for a city](https://user-images.githubusercontent.com/71162422/103448292-6293a200-4c4c-11eb-8c66-dd1016d74c81.gif)
+![A user searches for a city](https://user-images.githubusercontent.com/71162422/103448317-dd5cbd00-4c4c-11eb-806a-6738a732e461.gif)
 
 ## Tests
 

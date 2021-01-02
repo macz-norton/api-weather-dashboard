@@ -97,7 +97,7 @@ function getOneCall(lat, lon) {
         // Create variables to store new HTML element with API response data
         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: ");
         var uvSpan = $("<span></span>").addClass("badge").text(response.current.uvi);
-        console.log(response.current.uvi);
+
         // Append new variables to the HTML page
         $(".currentWeather").append(currentUVIndex);
         $(currentUVIndex).append(uvSpan);

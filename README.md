@@ -3,7 +3,7 @@
 
 ## Description
 
-The API Weather Dashboard uses the OpenWeather API to retrieve weather data for cities, runs in the browser, features dynamically updated HTML and CSS, and uses `localStorage` to store persistent data. 
+The API Weather Dashboard uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities, runs in the browser, features dynamically updated HTML and CSS, and uses `localStorage` to store persistent data. 
 
 ```
 AS A traveler
@@ -41,6 +41,7 @@ When you open the weather dashboard, type a city name and click the search butto
 
 ## Credits
 
+* [OpenWeather API](https://openweathermap.org/api)
 * [jQuery API](https://api.jquery.com/)
 * [Bootstrap](https://getbootstrap.com/)
 * [Font Awesome](https://fontawesome.com/)

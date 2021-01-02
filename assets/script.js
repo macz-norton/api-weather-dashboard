@@ -5,9 +5,8 @@ var userCity;
 var cityListItem;
 var savedCitySearch = JSON.parse(localStorage.getItem("Search History")) || [];
 
-// Add last searched city 
+// Add weather for last searched city upon page reload
 function showStoredCity() {
-
     getCurrentWeather(JSON.parse(localStorage.getItem("city")));
 }
 
@@ -44,13 +43,6 @@ $(".searchList").on("click", function(event) {
 
     var storedCity = $(event.target).attr("data-city");
     getCurrentWeather(storedCity);
-
-    // var btnCity = $(".list-group-item").attr("data-city");
-    // localStorage.setItem("data-city", JSON.stringify(btnCity));
-    // console.log(btnCity)
-    // var storedData = JSON.parse(window.localStorage.getItem("data-city"));
-    // // Run `getCurrentWeather` to query API
-    // getCurrentWeather(storedData);
 
 });
 
@@ -105,9 +97,10 @@ function getOneCall(lat, lon) {
         // Create variables to store new HTML element with API response data
         var currentUVIndex = $("<p>").addClass("card-text").text("UV Index: ");
         var uvSpan = $("<span></span>").addClass("badge").text(response.current.uvi);
+        console.log(response.current.uvi);
         // Append new variables to the HTML page
         $(".currentWeather").append(currentUVIndex);
-        $(currentUVIndex).append(uvSpan)
+        $(currentUVIndex).append(uvSpan);
 
         // If statement to add colors to HTML based on UV index scale
         if (response.current.uvi < 3) {
@@ -129,7 +122,7 @@ function getOneCall(lat, lon) {
             $(".day" + dayIndex).empty();
 
             var fiveDayDate = $("<h6>").addClass("card-title fw-bold").text(moment.unix(response.daily[dayIndex].dt).format("L"));
-            var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[dayIndex].weather[0].icon + ".png")
+            var fiveDayWeather = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.daily[dayIndex].weather[0].icon + ".png");
             var fiveDayTemp = $("<p>").addClass("card-text").text("Temp: " + response.daily[dayIndex].temp.day + " °F");
             var fiveDayHumidity = $("<p>").addClass("card-text").text("Humidity: " + response.daily[dayIndex].humidity + "%");
 
@@ -138,4 +131,3 @@ function getOneCall(lat, lon) {
 
     });
 }
-
